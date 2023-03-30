@@ -31,4 +31,13 @@ public class TodoService {
         this.todoRepository.delete(todoEntity);
     }
 
+    @Transactional
+    public void update(Integer id, String content) {
+        TodoEntity todoEntity = todoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 아이템이 없습니다. id=" + id));
+        todoEntity.setContent(content);
+        this.todoRepository.save(todoEntity);
+
+    }
+
 }
